@@ -71,4 +71,13 @@ public class Banque {
 		return lesComptes;
 	}
 	
+	public void effectuerVirement(int source, float 	
+			montant, int destination) 
+			throws DebitNonAutoriseException {
+		getCompte(source).debiter(montant);
+		getCompte(destination).crediter(montant);
+		
+	}
+
+	
 }

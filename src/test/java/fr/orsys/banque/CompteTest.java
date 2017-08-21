@@ -35,9 +35,15 @@ public class CompteTest {
 
 	
 	@Test
-	@Ignore
 	public void testDebiter() {
-		fail("not yet implemented !");
+		try {
+			cpt.debiter(200);
+			assertEquals(0.0f, cpt.getSolde(), 0.0f);
+			assertEquals(2, cpt.getLesOperations().size());
+		} catch (DebitNonAutoriseException e) {
+			// TODO Auto-generated catch block
+			fail("c'est une erreur ...");
+		}
 	}
 	
 	
