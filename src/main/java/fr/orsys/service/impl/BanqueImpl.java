@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import fr.orsys.dao.CompteDao;
 import fr.orsys.dao.impl.CompteDaoJpa;
@@ -14,7 +15,8 @@ import fr.orsys.entity.DebitNonAutoriseException;
 import fr.orsys.service.Banque;
 
 
-@Component
+//@Component
+@Service
 public class BanqueImpl implements Banque {
 	
 	private String nom;
