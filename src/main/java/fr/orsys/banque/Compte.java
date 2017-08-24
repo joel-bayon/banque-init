@@ -10,7 +10,7 @@ public class Compte {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = Logger.getLogger(Compte.class);
+	private static final Logger logger = Logger.getLogger("fr.orsys.banque.Compte");
 
 	int numero;
 	float solde;
