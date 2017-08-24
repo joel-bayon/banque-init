@@ -7,12 +7,15 @@ import javax.persistence.EntityManager;
 
 import org.junit.After;
 import org.junit.Before;
+import org.springframework.stereotype.Component;
 
 import util.JpaUtil;
 import fr.orsys.dao.CompteDao;
 import fr.orsys.entity.Compte;
 import fr.orsys.entity.CompteEpargne;
 
+
+@Component
 public class CompteDaoJpa implements CompteDao {
 
 	@Override

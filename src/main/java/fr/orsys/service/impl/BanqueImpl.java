@@ -2,21 +2,30 @@ package fr.orsys.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import fr.orsys.dao.CompteDao;
+import fr.orsys.dao.impl.CompteDaoJpa;
 import fr.orsys.entity.Compte;
 import fr.orsys.entity.CompteEpargne;
 import fr.orsys.entity.DebitNonAutoriseException;
 import fr.orsys.service.Banque;
 
+
+@Component
 public class BanqueImpl implements Banque {
 	
 	private String nom;
 	private String codeBanque;
 	
-	CompteDao compteDao;
+	@Autowired
+	CompteDao compteDao ;
 	
 	
-	public BanqueImpl(String nom, String codeBanque) {
+	@Autowired
+	public BanqueImpl(@Value("${banque.nom}") String nom, @Value("${banque.codeBanque}")String codeBanque) {
 		this.nom = nom;
 		this.codeBanque = codeBanque;
 	}
