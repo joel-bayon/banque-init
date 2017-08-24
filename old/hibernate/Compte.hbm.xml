@@ -1,0 +1,23 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="fr.orsys.entity">
+
+	<class name="Compte" >
+		<id name="numero"  >
+			<generator class="assigned" />
+		</id>
+		
+		<property name="solde" />
+		<property name="decouvertAutorise" />
+		
+		<list name="lesOperations" cascade="all,delete-orphan" >
+            <key column="COMPTE_ID" />
+            <list-index column="index"/>
+            <one-to-many class="Operation" />
+        </list>
+		
+		
+	</class>
+	
+</hibernate-mapping>

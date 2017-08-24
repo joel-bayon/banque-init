@@ -1,4 +1,4 @@
-package fr.orsys.banque;
+package fr.orsys.entity;
 
 public class DebitNonAutoriseException extends Exception {
 	

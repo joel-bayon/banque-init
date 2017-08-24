@@ -1,6 +1,8 @@
-package fr.orsys.banque;
+package fr.orsys.entity;
 
+import javax.persistence.Entity;
 
+@Entity
 public class CompteEpargne extends Compte {
 	private float taux;
 	private float cumulInterets;
@@ -11,6 +13,8 @@ public class CompteEpargne extends Compte {
 		cumulInterets =0;
 		decouvertAutorise = 0;
 	}
+	
+	public CompteEpargne() {}
 	
 	public void produireInterets() {
 		float benefices = getSolde() * taux;
@@ -30,5 +34,15 @@ public class CompteEpargne extends Compte {
 	public float getCumulInterets() {
 		// TODO Auto-generated method stub
 		return cumulInterets;
+	}
+
+	public void setTaux(float taux) {
+		this.taux = taux;
+	}
+
+	public void setCumulInterets(float cumulInterets) {
+		this.cumulInterets = cumulInterets;
 	}	
+	
+	
 }
