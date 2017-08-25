@@ -5,9 +5,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import util.JpaUtil;
 import fr.orsys.dao.CompteDao;
@@ -17,6 +18,7 @@ import fr.orsys.entity.CompteEpargne;
 
 //@Component
 @Repository("compteDao")
+@Transactional(propagation=Propagation.MANDATORY)
 public class CompteDaoJpaWithSpring implements CompteDao {
 	@PersistenceContext
 	EntityManager em;

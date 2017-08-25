@@ -2,15 +2,14 @@ package fr.orsys.service.impl;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import fr.orsys.dao.CompteDao;
-import fr.orsys.dao.impl.CompteDaoJpa;
 import fr.orsys.entity.Compte;
 import fr.orsys.entity.CompteEpargne;
 import fr.orsys.entity.DebitNonAutoriseException;
@@ -19,7 +18,11 @@ import fr.orsys.service.Banque;
 
 //@Component
 @Service
-@Transactional
+@Transactional(propagation=Propagation.REQUIRED,
+		rollbackFor={RuntimeException.class},
+		noRollbackFor={Exception.class},
+		isolation=Isolation.DEFAULT,
+		readOnly=false)
 public class BanqueImpl implements Banque {
 	
 	private String nom;
@@ -37,6 +40,7 @@ public class BanqueImpl implements Banque {
 
 
 	@Override
+	@Transactional(readOnly=true)
 	public List<Compte> getLesComptes() {
 		// TODO Auto-generated method stub
 		return compteDao.LoadAll();
@@ -56,12 +60,14 @@ public class BanqueImpl implements Banque {
 	
 
 	@Override
+	@Transactional(readOnly=true)
 	public Compte rechercherCompte(int numero) {
 		// TODO Auto-generated method stub
 		return compteDao.load(numero);
 	}
 
 	@Override
+	@Transactional(isolation=Isolation.READ_COMMITTED)
 	public float fermerCompte(int numero) {
 		 Compte c = rechercherCompte(numero);
 		 if(c!=null && c.getSolde()>=0) {
@@ -73,12 +79,14 @@ public class BanqueImpl implements Banque {
 	}
 
 	@Override
+	@Transactional(isolation=Isolation.READ_COMMITTED)
 	public void crediter(int idCompte, float montant) {
 		compteDao.load(idCompte).crediter(montant);
 
 	}
 
 	@Override
+	@Transactional(isolation=Isolation.READ_COMMITTED)
 	public void debiter(int idCompte, float montant)
 			throws DebitNonAutoriseException {
 		compteDao.load(idCompte).debiter(montant);
@@ -86,6 +94,7 @@ public class BanqueImpl implements Banque {
 	}
 
 	@Override
+
 	public void effectuerVirement(int idCpt1, float montant, int idCpt2)
 			throws DebitNonAutoriseException {
 		debiter(idCpt1, montant);
@@ -93,12 +102,14 @@ public class BanqueImpl implements Banque {
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public String getNom() {
 		// TODO Auto-generated method stub
 		return nom;
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public String getCodeBanque() {
 		// TODO Auto-generated method stub
 		return codeBanque;
