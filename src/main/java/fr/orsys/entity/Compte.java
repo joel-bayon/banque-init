@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -26,7 +27,7 @@ public class Compte {
 
 	private static int compteurCompte = 1;
 
-	@OneToMany(cascade=CascadeType.ALL,orphanRemoval=true)
+	@OneToMany(cascade=CascadeType.ALL,orphanRemoval=true, fetch=FetchType.EAGER)
 	@JoinColumn(name="COMPTE_NUMERO")
 	private List<Operation> lesOperations = new ArrayList<Operation>();
 

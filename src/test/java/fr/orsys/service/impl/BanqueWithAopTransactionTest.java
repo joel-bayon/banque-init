@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -49,6 +50,7 @@ public class BanqueWithAopTransactionTest {
 	}
 
 	@Test
+	@Ignore
 	public void testFermerCompte() {
 		for(Compte c : banque.getLesComptes())
 			banque.fermerCompte(c.getNumero());
