@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="banqueApp"> 
+<head>
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript" src="js/biblio.js"></script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body ng-controller="compteController">
+<div ng-if="!compte">
+<button ng-click="loadAll()">Load</button> &nbsp; <button ng-click="reset()">reset</button>
+<table>
+	<tr><td>numero</td><td>solde</td><td>découvert</td></tr>
+	<!-- Construction dynamique du contenu du tableau -->
+	<tr ng-repeat="compte in comptes">
+		<td style="color: blue; text-decoration: underline; pointer: cursor" ng-click="load(livre.id)">
+			{{compte.numero}}
+		</td>
+		<td>{{compte.solde}}</td>
+		<td>{{compte.decouvertAutorise}}</td>
+		
+	</tr>
+</table>
+</div>
+<div ng-if="compte">
+	<pre>{{compte | json}}</pre><br/>
+	<button ng-click="back()">Back</button>
+</div>
+</body>
+</html>
