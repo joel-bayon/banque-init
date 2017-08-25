@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.ContextLoaderListener;
 
 import fr.orsys.entity.Compte;
 import fr.orsys.service.Banque;
@@ -16,12 +17,13 @@ import fr.orsys.service.Banque;
 public class HelloController {
 	@Autowired
 	Banque banque;
+
 	
 	public HelloController () {
 		System.out.println("**** instanciation de HelloController ******");
 	}
 	
-	@RequestMapping("/comptes")
+	//@RequestMapping("/comptes")
 	public String listerComptes(Model model) {
 		System.out.println("/comptes");
 		List<Compte> lc = banque.getLesComptes();

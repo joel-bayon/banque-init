@@ -67,7 +67,7 @@ public class BanqueImpl implements Banque {
 	}
 
 	@Override
-	@Transactional(isolation=Isolation.READ_COMMITTED)
+	//@Transactional(isolation=Isolation.READ_COMMITTED)
 	public float fermerCompte(int numero) {
 		 Compte c = rechercherCompte(numero);
 		 if(c!=null && c.getSolde()>=0) {
@@ -79,14 +79,14 @@ public class BanqueImpl implements Banque {
 	}
 
 	@Override
-	@Transactional(isolation=Isolation.READ_COMMITTED)
+	
 	public void crediter(int idCompte, float montant) {
 		compteDao.load(idCompte).crediter(montant);
 
 	}
 
 	@Override
-	@Transactional(isolation=Isolation.READ_COMMITTED)
+	//@Transactional(isolation=Isolation.READ_COMMITTED)
 	public void debiter(int idCompte, float montant)
 			throws DebitNonAutoriseException {
 		compteDao.load(idCompte).debiter(montant);
