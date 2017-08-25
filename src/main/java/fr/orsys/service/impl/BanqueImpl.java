@@ -2,6 +2,8 @@ package fr.orsys.service.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -17,6 +19,7 @@ import fr.orsys.service.Banque;
 
 //@Component
 @Service
+@Transactional
 public class BanqueImpl implements Banque {
 	
 	private String nom;

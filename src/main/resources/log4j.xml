@@ -18,10 +18,21 @@
         	<param name="ConversionPattern" value="%d %-5p [%c{1}] %m%n"/>
     	</layout>
 	</appender>
+	<appender name="fileDao" class="org.apache.log4j.FileAppender">
+		<param name="file" value="banque.dao.log"/>
+    	<layout class="org.apache.log4j.PatternLayout">
+        	<param name="ConversionPattern" value="%d %-5p [%c{1}] %m%n"/>
+    	</layout>
+	</appender>
 	
-	<logger name="fr.orsys.banque" additivity="false">
+	<logger name="fr.orsys.service" additivity="false">
 		<level value="info"></level>
-		<appender-ref ref="console"/>
+		<appender-ref ref="file"/>
+	</logger>
+	
+	<logger name="fr.orsys.dao" additivity="false">
+		<level value="info"></level>
+		<appender-ref ref="fileDao"/>
 	</logger>
 
 	<root>

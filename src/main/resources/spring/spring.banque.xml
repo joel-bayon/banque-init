@@ -1,13 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+     xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
   http://www.springframework.org/schema/beans/spring-beans.xsd
   http://www.springframework.org/schema/context
-  http://www.springframework.org/schema/context/spring-context.xsd">
+  http://www.springframework.org/schema/context/spring-context.xsd
+  http://www.springframework.org/schema/aop 
+  http://www.springframework.org/schema/aop/spring-aop.xsd
+  http://www.springframework.org/schema/tx 
+  http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<context:component-scan base-package="fr.orsys.dao, fr.orsys.service"/>
+	<context:component-scan base-package="fr.orsys.dao, fr.orsys.service, fr.orsys.aop"/>
 	<context:property-placeholder location="classpath:/spring/banque.properties"/>
+	<aop:aspectj-autoproxy/>
+	<tx:annotation-driven  transaction-manager="transactionManager"/>
+	
+	
+<!-- 	<aop:config>
+		<aop:aspect ref="transactionAdvisor">
+			<aop:around method="transactionProceeding" 
+			            pointcut="execution(* fr..BanqueImpl.*(..))"/>
+		</aop:aspect>
+	</aop:config> -->
+	
+	    <bean id="entityManagerFactory"   
+ 	  class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+    			<property name="persistenceUnitName" 
+					 value="banque"/>
+    </bean>
+    <bean id="transactionManager" 	   
+	   class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" 
+				     ref="entityManagerFactory"/>
+    </bean>
+	
 	
 </beans>

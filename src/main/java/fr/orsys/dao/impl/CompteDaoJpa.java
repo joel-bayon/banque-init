@@ -4,10 +4,6 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-
-import org.junit.After;
-import org.junit.Before;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import util.JpaUtil;
@@ -19,7 +15,6 @@ import fr.orsys.entity.CompteEpargne;
 //@Component
 @Repository
 public class CompteDaoJpa implements CompteDao {
-
 	@Override
 	public Integer save(Compte entity) {
 		EntityManager em = JpaUtil.getCurrentEntityManager();

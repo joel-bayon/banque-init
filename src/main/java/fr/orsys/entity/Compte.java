@@ -17,10 +17,7 @@ import javax.persistence.OneToMany;
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Compte {
-	/**
-	 * Logger for this class
-	 */
-	private static final Logger logger = Logger.getLogger("fr.orsys.banque.Compte");
+
 
 	@Id
 	int numero;
@@ -71,18 +68,14 @@ public class Compte {
 	}
 
 	public void crediter(float montant) {
-		if (logger.isInfoEnabled()) {
-			logger.info("crediter(float)"); //$NON-NLS-1$
-		}
+		
 
 		solde += montant;
 		lesOperations.add(new Operation(montant, Operation.CREDIT));
 	}
 
 	public void debiter(float montant) throws DebitNonAutoriseException {
-		if (logger.isInfoEnabled()) {
-			logger.info("debiter(float)"); //$NON-NLS-1$
-		}
+		
 		if ((solde + decouvertAutorise) >= montant) {
 			solde -= montant;
 			lesOperations.add(new Operation(montant, Operation.DEBIT));
@@ -114,9 +107,7 @@ public class Compte {
 
 	@SuppressWarnings("resource")
 	public void traiterDecouvertNonAutorise(float montant) {
-		if (logger.isInfoEnabled()) {
-			logger.info("traiterDecouvertNonAutorise(float)"); //$NON-NLS-1$
-		}
+		
 		System.out.println("**** traitement d'un débit non autorisé !! ******");
 		editerReleve();
 		System.out.println("Montant demandé :" + montant);
